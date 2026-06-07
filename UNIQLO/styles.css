@@ -1,0 +1,2930 @@
+/* ==========================================================================
+   1. ĐẶT LẠI & CÁC STYLE CƠ BẢN (Reset & Base Styles)
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Đảm bảo padding không làm nở rộng chiều rộng hộp */
+}
+
+body {
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    background: #fff;
+    color: #333;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased; /* Làm mịn chữ trên các hệ điều hành MacOS */
+}
+
+a {
+    text-decoration: none;
+    color: inherit; /* Thừa kế màu sắc từ thẻ cha */
+}
+
+a:focus, button:focus {
+    outline: none; /* Bỏ viền xanh mặc định khi click chuột */
+}
+
+button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+ul {
+    list-style: none; /* Bỏ chấm tròn mặc định của danh sách */
+}
+
+
+/* ==========================================================================
+   2. HEADER & THANH ĐIỀU HƯỚNG CHÍNH (Header & Primary Nav)
+   ========================================================================== */
+
+/* Khung gầm bọc Header cố định ở đầu trang */
+.nav-container {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    z-index: 100;
+}
+
+/* Thanh nav căn giữa giới hạn độ rộng 1200px */
+nav {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 40px; /* Khoảng cách giữa logo và các liên kết */
+}
+
+/* Cấu trúc vẽ Logo đỏ đặc trưng của UNIQLO */
+#logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.logo-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    background: #e60012; /* Đỏ chuẩn Uniqlo */
+}
+
+.logo-jp-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5px;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.1;
+    text-align: center;
+}
+
+.logo-en-text {
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+
+/* Các liên kết danh mục lớn trên Header */
+.nav-links {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.nav-links li {
+    list-style: none;
+}
+
+.nav-links a {
+    font-size: 18px;
+    font-weight: 400;
+    color: rgba(27, 27, 27, 0.629); /* Chữ màu xám mờ tinh tế */
+    text-decoration: none;
+    padding: 10px 14px;
+    border: 1px solid transparent;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active:hover {
+    color: #000000; /* Đổi sang màu đen đậm khi hover */
+}
+
+/* Các Icon điều hướng góc phải Header (Search, Heart, Cart...) */
+.nav-icons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-icon-btn {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+.hicon {
+    width: 22px;
+    height: 22px;
+    stroke: rgba(27, 27, 27, 0.629);
+    stroke-width: 1.8;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: stroke 0.2s ease;
+}
+
+.header-icon-btn:hover .hicon {
+    stroke: #000000;
+}
+
+/* Đổi màu chấm bánh xe trên icon giỏ hàng khi hover */
+.hicon-cart circle {
+    fill: #1b1b1b;
+    transition: fill 0.2s ease;
+}
+
+.header-icon-btn:hover .hicon-cart circle {
+    fill: #e60012;
+}
+
+/* Chấm đỏ báo số lượng sản phẩm trong giỏ */
+.cart-badge {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background: #e60012;
+    color: #fff;
+    font-size: 10px;
+    font-weight: bold;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ẩn hiện trên mobile */
+.hide-mobile {
+    display: flex;
+}
+
+#mobile-menu-btn {
+    display: flex;
+}
+
+
+/* ==========================================================================
+   3. MEGA MENU & THANH TÌM KIẾM PHỤ TRONG MENU (Mega Menu)
+   ========================================================================== */
+.mega-menu {
+    position: fixed;
+    top: 80px; /* Ngay dưới chân Header */
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: #fff;
+    max-height: calc(90vh - 80px);
+    overflow-y: auto;
+    z-index: 95;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+    scrollbar-width: thin;
+}
+
+.mega-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.mega-menu::-webkit-scrollbar {
+    width: 6px;
+}
+
+.mega-menu::-webkit-scrollbar-thumb {
+    background: #ddd;
+    border-radius: 3px;
+}
+
+.menu-container {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0px 107px 40px;
+}
+
+/* Thanh tìm kiếm mô phỏng nằm trong Mega Menu */
+.menu-search-bar {
+    position: relative;
+    margin-bottom: 30px;
+    padding: 4px;
+}
+
+.menu-search-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-search-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.menu-search-input {
+    width: 100%;
+    padding: 14px 16px 14px 48px;
+    border: 1.5px solid #adadad;
+    border-radius: 30px;
+    font-size: 14px;
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    color: #1b1b1b;
+    transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.menu-search-input:hover {
+    border-color: #cfcfcff2;
+}
+
+.menu-search-input:hover::placeholder {
+    color: #c0c0c0;
+}
+
+
+/* ==========================================================================
+   4. LỚP PHỦ TÌM KIẾM TOÀN MÀN HÌNH (Search Overlay Fullscreen)
+   ========================================================================== */
+.search-overlay-fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Nền tối mờ che các phần tử bên dưới */
+    z-index: 9999;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.25s ease, visibility 0.25s;
+    overflow: hidden;
+}
+
+.search-overlay-fullscreen.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.search-overlay-fullscreen.active .search-panel {
+    transform: translateY(0);
+}
+
+/* Khung nội dung trắng sổ xuống 90% màn hình */
+.search-panel {
+    background-color: #ffffff;
+    width: 100%;
+    height: 90vh;
+    overflow-y: auto;
+    transform: translateY(-10px);
+    transition: transform 0.25s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.search-header {
+    display: flex;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 24px;
+    gap: 20px;
+}
+
+.search-action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: #1b1b1b;
+    transition: background 0.2s;
+}
+
+.search-action-btn:hover {
+    background-color: #f5f5f5;
+}
+
+.search-action-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.search-input-real-wrap {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Biểu tượng kính lúp bên trong ô tìm kiếm khi chưa focus */
+.search-icon-inside {
+    position: absolute;
+    left: 18px;
+    pointer-events: none; /* Rê và click chuột xuyên qua để focus trực tiếp vào input */
+    display: flex;
+    align-items: center;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.search-icon-inside svg {
+    width: 18px;
+    height: 18px;
+    stroke: #999;
+}
+
+/* Ô nhập từ khóa thực sự - Viền xám nhạt thanh lịch khi ở trạng thái mặc định */
+.search-input-real {
+    width: 100%;
+    padding: 12px 16px 12px 46px; /* Padding trái rộng 46px để dành chỗ cho kính lúp */
+    border: 1.5px solid #adadad;
+    border-radius: 999px;
+    font-size: 15px;
+    outline: none;
+    box-shadow: none;
+    color: #1b1b1b;
+    background: #fff;
+    transition: all 0.2s ease;
+}
+
+.search-input-real::placeholder {
+    color: #9d9b9b;
+}
+
+/* Hiệu ứng Hover - Đổi viền sang đen xám giống kính lúp menu */
+.search-input-real:hover {
+    border-color: #1b1b1b;
+}
+
+/* Trạng thái Focus (Khi nhấp vào) - Viền màu xanh coban cao cấp bọc quanh */
+/* Trạng thái Focus - Hiệu ứng viền xanh bọc viền đen giống hệt ảnh mẫu */
+.search-input-real:focus {
+    border-color: #adadad;
+    outline: none;
+    box-shadow: 0 0 0 2px #ffffff,0 0 0 3px #1a73e8;
+    padding-left: 20px;
+}
+/* CSS Sibling Selector: Khi input được focus, ẩn kính lúp phía sau đi */
+.search-input-real:focus + .search-icon-inside {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.search-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0px 24px 40px 84px; /* Thụt lề căn thẳng hàng với ô input */
+}
+
+/* Các liên kết nhanh dính dưới ô tìm kiếm */
+.search-quick-links-wrapper {
+    width: 100%;
+    border-bottom: 1.5px solid #0101012d;
+    background-color: #ffffff;
+    margin-bottom: 24px;
+}
+
+.search-quick-links {
+    display: flex;
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 12px 24px 16px 84px; 
+}
+
+.quick-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #1b1b1b;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.quick-link:hover {
+    opacity: 0.7;
+}
+
+.quick-link-icon {
+    width: 18px;
+    height: 18px;
+    stroke: #1b1b1b;
+    stroke-width: 1.8;
+    fill: none;
+}
+
+.search-popular h3,
+.history-head h3 {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 16px;
+    color: #1b1b1b;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+/* Bong bóng từ khóa phổ biến */
+.popular-tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.tag-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    border: 1.5px solid #d3d3d3;
+    border-radius: 999px;
+    color: #1b1b1b;
+    font-size: 13px;
+    font-weight: 500; 
+    background-color: #ffffff;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.tag-item svg {
+    width: 16px; 
+    height: 16px;
+    stroke: #1b1b1b; 
+    stroke-width: 2.6; 
+    fill: none;
+}
+
+.tag-item:hover {
+    border-color: #1b1b1b;
+}
+
+.history-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.history-line {
+    height: 1.5px;
+    background-color: #f5f5f5;
+    margin: 12px 0;
+}
+
+.search-history-box p {
+    color: #757575;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.search-missing-box {
+    margin-top: 40px;
+    padding-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.search-missing-box h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1b1b1b;
+    margin: 0;
+}
+
+/* Nút tìm kiếm danh mục */
+.category-search-btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    padding: 14px 24px;
+    border: 1.5px solid #1b1b1b;
+    border-radius: 999px;
+    background-color: #ffffff;
+    color: #1b1b1b;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+/* Lưới hiển thị danh mục trong ô tìm kiếm */
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 30px;
+}
+
+.category-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.category-icon {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+}
+
+.category-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.category-name {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.4;
+    text-align: center;
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Các cột phân mục tin tức, thông báo trong menu */
+.menu-section {
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.menu-section:last-child {
+    border-bottom: none;
+}
+
+.menu-section h3 {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    color: #111;
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+.menu-notices {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.menu-notice-link {
+    font-size: 13px;
+    color: #0066cc;
+    text-decoration: none;
+    line-height: 1.6;
+    transition: opacity 0.3s ease;
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+.menu-notice-link:hover {
+    opacity: 0.7;
+    text-decoration: underline;
+}
+
+.menu-grid-5,
+.menu-grid-4,
+.menu-grid-3 {
+    display: grid;
+    gap: 16px;
+}
+
+.menu-grid-5 {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.menu-grid-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.menu-grid-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* Thẻ bài viết phong cách Lifewear */
+.lifewear-style-card {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 0;
+    overflow: hidden;
+    transition: opacity 0.3s ease;
+}
+
+.lifewear-style-card:hover {
+    opacity: 0.85;
+}
+
+.card-img-wrap {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.card-img-wrap img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.lifewear-style-card:hover .card-img-wrap img {
+    transform: scale(1.05); /* Hiệu ứng zoom ảnh mượt khi hover */
+}
+
+.lifewear-style-card h4 {
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.5;
+    margin: 12px 0 6px;
+    color: #111;
+    padding: 0;
+}
+
+.lifewear-style-card p {
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    font-size: 12px;
+    color: #666;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* ==========================================================================
+   5. MENU NGANG CHỮ NHỎ (Subcategory Navigation Wrapper)
+   ========================================================================== */
+
+/* Menu ngang chứa các text-tabs phụ */
+.subcategory-nav-wrapper {
+    width: 100%;
+    background-color: #ffffff;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+}
+
+.subcategory-nav-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.subcategory-nav-scroll {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2px;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.subcategory-nav-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+.sub-nav-tab,
+.sub-nav-tab-quan,
+.sub-nav-tab-aokhoac,
+.sub-nav-tab-damvay,
+.sub-nav-tab-dolot,
+.sub-nav-tab-domacnha,
+.sub-nav-tab-phukien,
+.sub-nav-tab-suw,
+.sub-nav-tab-heattech {
+    display: inline-flex;
+    align-items: center;
+    padding: 14px 16px;
+    font-size: 15px;
+    font-weight: 500;
+    color: rgba(27, 27, 27, 0.553);
+    text-decoration: none;
+    white-space: nowrap;
+    position: relative;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.sub-nav-tab:hover,
+.sub-nav-tab-quan:hover,
+.sub-nav-tab-aokhoac:hover,
+.sub-nav-tab-damvay:hover,
+.sub-nav-tab-dolot:hover,
+.sub-nav-tab-domacnha:hover,
+.sub-nav-tab-phukien:hover,
+.sub-nav-tab-suw:hover,
+.sub-nav-tab-heattech:hover {
+    color: #000000;
+}
+
+/* Trạng thái active: Chữ in đậm và có thanh chân đen 2px sát đáy */
+.sub-nav-tab.active,
+.sub-nav-tab-quan.active,
+.sub-nav-tab-aokhoac.active,
+.sub-nav-tab-damvay.active,
+.sub-nav-tab-dolot.active,
+.sub-nav-tab-domacnha.active,
+.sub-nav-tab-phukien.active,
+.sub-nav-tab-suw.active,
+.sub-nav-tab-heattech.active {
+    font-weight: 700;
+    color: #000000;
+}
+
+.sub-nav-tab.active::after,
+.sub-nav-tab-quan.active::after,
+.sub-nav-tab-aokhoac.active::after,
+.sub-nav-tab-damvay.active::after,
+.sub-nav-tab-dolot.active::after,
+.sub-nav-tab-domacnha.active::after,
+.sub-nav-tab-phukien.active::after,
+.sub-nav-tab-suw.active::after,
+.sub-nav-tab-heattech.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 16px;
+    right: 16px;
+    height: 2px;
+    background-color: #000000;
+}
+
+
+/* ==========================================================================
+   6. HERO BANNER TRẺ EM & GENDER TABS (Hero Banner & Gender Tabs)
+   ========================================================================== */
+
+/* Khung chứa ảnh banner máy tính */
+.casual-hero-banner {
+    width: 100%;
+    height: 500px; 
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 0;
+    background: #eaeaea;
+}
+
+.casual-banner-picture {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.casual-banner-img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center top; /* Giữ lấy phần khuôn mặt ở phía trên ảnh */
+}
+
+/* Lớp chữ màu trắng đè lên mặt ảnh */
+.casual-banner-content-overlay {
+    position: absolute;
+    bottom: 8%; /* Đẩy lên vừa vặn ở góc dưới */
+    left: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 2;
+}
+
+.casual-banner-title {
+    font-size: 38px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: #ffffff; 
+    margin-bottom: 6px;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45); /* Bóng mờ để tăng tính tương phản cho chữ trắng */
+}
+
+.casual-banner-subtitle {
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffffff;
+    letter-spacing: 0.03em;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+}
+
+/* Nút viên thuốc màu trắng sang trọng */
+.casual-banner-btn {
+    display: inline-block;
+    background-color: #ffffff;
+    color: #1b1b1b;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 8px 24px;
+    border-radius: 999px;
+    margin-top: 14px;
+    text-decoration: none;
+    border: 1px solid #ffffff;
+    transition: all 0.2s ease;
+}
+
+.casual-banner-btn:hover {
+    background-color: rgba(255, 255, 255, 0.85);
+}
+
+/* Thanh phân loại giới tính Nữ | Nam | Trẻ em ngay dưới banner */
+.banner-gender-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    background-color: #ffffff;
+    padding: 16px 0;
+}
+
+.gender-tab {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(27, 27, 27, 0.6);
+    text-decoration: none;
+    padding-bottom: 6px;
+    position: relative;
+    transition: color 0.2s ease;
+}
+
+.gender-tab:hover {
+    color: #000000;
+}
+
+.gender-tab.active {
+    font-weight: 700;
+    color: #000000;
+}
+
+.gender-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #000000;
+}
+
+
+/* ==========================================================================
+   7. BONG BÓNG DANH MỤC TRÒN / THẺ CHỮ NHẬT ĐỨNG (Category Tabs Section)
+   ========================================================================== */
+#category-tabs-section,
+#product-category-section,
+#sweat-category-section,
+#quan-category-tabs-section,
+#quandai-category-section,
+#quanshort-category-section,
+#ao-category-tabs-section,#aokhoac-category-tabs-section,#aobp-category-tabs-section,
+#damvay-category-tabs-section,#dam-category-tabs-section,#vay-category-tabs-section,
+#dotl-category-tabs-section,#airism-category-tabs-section,#heattech-category-tabs-section,
+#aobra-category-tabs-section,#quantat-category-tabs-section,#dolotkhac-category-tabs-section,
+#tat-category-tabs-section,
+#domacnha-category-tabs-section,
+#pajama-category-section,
+#suw-category-tabs-section,
+#phukien-category-tabs-section {
+    padding: 24px 20px 0;
+    max-width: 1210px; 
+    margin: 0 auto;
+}
+
+.prod-cat-title {
+    font-size: 16px;
+    font-weight: 400;
+    color: #1b1b1b;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+}
+
+.category-main-title {
+    font-size: 32px;
+    font-weight: 400;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0;
+}
+
+.category-tabs-scroll {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 20px;
+}
+
+.category-tabs-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* Khối thẻ liên kết danh mục - Chiếm chiều rộng cố định 160px */
+.cat-tab {
+    display: flex;
+    flex-direction: column;
+    width: 160px;
+    flex-shrink: 0;
+    text-decoration: none;
+    color: #1b1b1b;
+    cursor: pointer;
+}
+
+/* Khung bọc ảnh danh mục - Đạt tỷ lệ chữ nhật đứng 3:4 chuẩn mực */
+.cat-tab-img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    background: #f4f4f4;
+    border: 1.5px solid #e8e8e8;
+    overflow: hidden;
+    margin-bottom: 10px;
+    transition: border-color 0.2s ease;
+}
+
+.cat-tab-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.cat-tab:hover .cat-tab-img {
+    border-color: #9e9e9e;
+}
+
+/* Thẻ được chọn active: Có viền đen mỏng bao bọc */
+.cat-tab.active .cat-tab-img {
+    border: 1px solid #1b1b1b;
+}
+
+.cat-tab-title {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: #1b1b1b;
+    white-space: pre-line;
+    word-break: break-word;
+}
+
+.cat-tab.active .cat-tab-title {
+    font-weight: 700;
+}
+
+
+/* ==========================================================================
+   8. BỘ LỌC dropdown & DROPDOWN SẮP XẾP (Filter Bar & Sort Dropdown)
+   ========================================================================== */
+#filter-bar {
+    position: sticky;
+    top: 80px;
+    z-index: 80;
+    width: 100%;
+    max-width: none; 
+    background: #ffffff;
+    border-bottom: none; /* Bỏ viền mặc định khi nằm tĩnh */
+    transition: top 0.40s ease; /* Chuyển động trượt êm ái khi đổi lề ghim */
+}
+
+/* Cửa hàng tiện ích ở hàng trên */
+.filter-top-row {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.store-availability {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 16px;
+}
+
+.store-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.store-text {
+    font-size: 13px;
+}
+
+.select-store-link {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(0, 94, 181, 0.728);
+    white-space: nowrap;
+    transition: opacity 0.2s;
+}
+
+.select-store-link:hover {
+    opacity: 0.75;
+}
+
+/* Hàng chứa các nút chọn lọc ( availability, size, color... ) */
+.filter-actions-row {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    gap: 8px;
+    scrollbar-width: none;
+    flex-wrap: wrap;
+    position: relative; 
+    z-index: 50;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.filter-actions-row::-webkit-scrollbar {
+    display: none;
+}
+
+.filter-wrapper {
+    position: static; /* Cho phép các menu dropdown con mở rộng hết chiều ngang của thanh bar */
+}
+
+/* Nút bộ lọc viên thuốc bo tròn nền trắng trơn */
+.filter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    border: 1px solid #d0d0d0;
+    border-radius: 999px;
+    background: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    color: #1b1b1b;
+    white-space: nowrap;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: border-color 0.3s;
+    font-family: inherit;
+}
+
+.filter-btn:hover {
+    border-color: #999;
+}
+
+.filter-btn.active {
+    font-weight: 600;  
+    color: #1b1b1b;    
+}
+
+.dropdown-arrow {
+    transition: transform 0.3s ease;
+}
+
+.filter-btn.active .dropdown-arrow {
+    transform: rotate(180deg); /* Xoay ngược mũi tên khi dropdown mở */
+}
+
+.filter-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    background: transparent; 
+    color: #1b1b1b;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.filter-icon-btn:hover {
+    color: #757575;
+}
+
+/* Khung menu bộ lọc chi tiết (mặc định ẩn bằng opacity & visibility) */
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% - 5px);
+    left: 20px;
+    width: 600px;
+    background: #fff;
+    border: 1px solid #1b1b1b4f;
+    padding: 20px;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px);
+    transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+}
+
+.dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.dropdown-result {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.dropdown-close {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    cursor: pointer;
+    color: #555;
+    background: transparent;
+    border: none;
+    transition: opacity 0.2s ease;
+}
+
+.dropdown-close:hover {
+    background: transparent;
+    opacity: 0.5; /* Làm mờ nhẹ khi hover đóng */
+}
+
+.dropdown-subtitle {
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+/* Lưới căn các ô tùy chọn bên trong bộ lọc (2 cột) */
+.radio-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 16px 12px;
+}
+
+.radio-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 0;             
+    font-size: 14px;
+    cursor: pointer;
+    border-bottom: none;     
+}
+
+.radio-option:last-child {
+    border-bottom: none;
+}
+
+/* Ô tròn radio button tự vẽ */
+.radio-option input[type="radio"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 1.5px solid #1b1b1b;
+    border-radius: 50%;
+    position: relative;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.radio-option input[type="radio"]:checked::after {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    background: #1b1b1b;
+    border-radius: 50%;
+}
+
+.radio-option.disabled {
+    color: #aaa;
+    cursor: not-allowed;
+}
+
+.radio-option.disabled input {
+    border-color: #ccc;
+    cursor: not-allowed;
+}
+
+.checkbox-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 12px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    line-height: 1.4;
+}
+
+.checkbox-label input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Ô vuông checkbox tự vẽ */
+.custom-checkbox {
+    width: 20px;
+    height: 20px;
+    border: 1.5px solid #757575;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s;
+}
+
+.checkbox-label:hover .custom-checkbox {
+    border-color: #1b1b1b;
+}
+
+.checkbox-label input[type="checkbox"]:checked + .custom-checkbox {
+    background: #1b1b1b;
+    border-color: #1b1b1b;
+}
+
+/* Dấu tick V màu trắng vẽ bằng CSS border */
+.checkbox-label input[type="checkbox"]:checked + .custom-checkbox::after {
+    content: '';
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    margin-bottom: 2px;
+}
+
+.color-swatch {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    flex-shrink: 0;
+    transition: opacity 0.2s;
+}
+
+.checkbox-label input[type="checkbox"]:checked + .color-swatch {
+    box-shadow: 0 0 0 1.5px #fff, 0 0 0 3px #1b1b1b; /* Đường viền kép khi chọn màu */
+}
+
+/* Hàng kết quả/Sắp xếp đẩy sát sang lề phải */
+.filter-results-row {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 8px 20px 2px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Thiết lập số lượng sản phẩm (Mặc định ẩn đi) */
+.result-count {
+    display: none;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Hiển thị số lượng sản phẩm tương ứng với từng trang được kích hoạt */
+body.view-all .result-count.count-all {
+    display: block;
+}
+body.view-polo .result-count.count-polo {
+    display: block;
+}
+body.view-ut .result-count.count-ut {
+    display: block;
+}
+body.view-sweat .result-count.count-sweat {
+    display: block;
+}
+body.view-quan .result-count.count-quan {
+    display: block;
+}
+body.view-quandai .result-count.count-quan {
+    display: block;
+}
+body.view-aokhoac .result-count.count-aokhoac {
+    display: block;
+}
+body.view-aobp .result-count.count-aobp {
+    display: block;
+}
+body.view-ao .result-count.count-ao {
+    display: block;
+}
+body.view-damvay .result-count.count-damvay {
+    display: block;
+}
+body.view-dam .result-count.count-dam {
+    display: block;
+}
+body.view-vay .result-count.count-vay {
+    display: block;
+}
+body.view-dolot .result-count.count-dolot {
+    display: block;
+}
+body.view-airism .result-count.count-airism {
+    display: block;
+}
+body.view-heattech .result-count.count-heattech {
+    display: block;
+}
+body.view-heattechh .result-count.count-heattechh {
+    display: block;
+}
+body.view-ht .result-count.count-ht {
+    display: block;
+}
+body.view-htextra .result-count.count-htextra {
+    display: block;
+}
+body.view-htultra .result-count.count-htultra {
+    display: block;
+}
+body.view-htdomactrong .result-count.count-htdomactrong {
+    display: block;
+}
+body.view-aobra .result-count.count-aobra {
+    display: block;
+}
+body.view-quantat .result-count.count-quantat {
+    display: block;
+}
+body.view-dolotkhac .result-count.count-dolotkhac {
+    display: block;
+}
+body.view-tat .result-count.count-tat {
+    display: block;
+}
+
+
+.sort-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.sort-btn:hover {
+    opacity: 0.7;
+}
+
+.sort-dropdown-wrapper {
+    position: relative;
+    margin-left: auto; /* Luôn đẩy phần sắp xếp sát về góc phải */
+}
+
+.sort-dropdown-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: #1b1b1b;
+    transition: opacity 0.2s;
+}
+
+.sort-dropdown-btn:hover {
+    opacity: 0.7;
+}
+
+/* Hộp sắp xếp sản phẩm trượt */
+.sort-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 220px;
+    background: #fff;
+    border: 1px solid #1b1b1b2e;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    display: none;
+}
+
+.sort-dropdown-menu.show {
+    display: block;
+}
+
+.sort-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+    border-bottom: 1px solid #23232322;
+}
+
+.sort-option:hover {
+    background: #f4f4f4;
+}
+
+.sort-option.active {
+    font-weight: 600;
+}
+
+.check-icon {
+    flex-shrink: 0;
+}
+
+.availability-menu-subtitle-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+}
+
+
+/* ==========================================================================
+   9. BỘ CHỌN SELECT BOX TỰ CHỈNH (Custom Select Box)
+   ========================================================================== */
+.gender-category-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.gc-breadcrumb {
+    font-size: 11px;
+    font-weight: 700;
+    color: #757575;
+}
+
+.gc-select-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.gc-select-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    border: 1px solid #1b1b1b;
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+    background-color: #ffffff;
+    user-select: none;
+    transition: all 0.2s ease;
+}
+
+/* Đổi viền sang màu xanh coban cực chất khi selectbox mở rộng */
+.gc-select-wrapper.open .gc-select-box {
+    border-color: #005db5;
+    outline: 1.5px solid #005db5;
+}
+
+.gc-arrow-icon {
+    transition: transform 0.2s ease;
+}
+
+.gc-options-list {
+    position: absolute;
+    top: calc(100% + 2px);
+    left: 0;
+    right: 0;
+    background-color: #ffffff;
+    border: 1px solid #adadad;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    display: none;
+    flex-direction: column;
+    max-height: 240px;
+    overflow-y: auto;
+}
+
+.gc-select-wrapper.open .gc-options-list {
+    display: flex;
+}
+
+.gc-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    border-bottom: 1px solid #f5f5f5;
+    background-color: #ffffff;
+    transition: background-color 0.2s ease;
+}
+
+.gc-option:last-child {
+    border-bottom: none;
+}
+
+.gc-option:hover {
+    background-color: #f5f5f5;
+}
+
+.gc-option.active {
+    font-weight: 700;
+    background-color: #f5f5f5;
+}
+
+.gc-option .check-icon {
+    color: #1b1b1b;
+    stroke-width: 2.5;
+    flex-shrink: 0;
+}
+
+
+/* ==========================================================================
+   10. LƯỚI SẢN PHẨM & THẺ SẢN PHẨM (Products Grid, Cards & Banner Card)
+   ========================================================================== */
+.products-section {
+    max-width: 1200px;
+    margin: -8px auto 60px;
+    padding: 0 20px;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Mặc định 4 cột trên máy tính */
+    gap: 1px;
+}
+
+/* Tiêu đề danh mục sản phẩm (ví dụ: Ngắn Tay) */
+.products-section-title {
+    font-size: 22px;
+    font-weight: 400;
+    color: #1b1b1b;
+    margin: 32px 0 20px 0;
+    text-transform: none;
+    letter-spacing: -0.019em;
+    font-family: inherit;
+}
+
+/* Thẻ Banner lớn quảng cáo sản phẩm (chiếm 2 cột trong lưới) */
+.product-banner-card {
+    grid-column: span 2;
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+    padding: 0 0 16px 0;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.product-banner-image-wrap {
+    width: 100%;
+    aspect-ratio: 3 / 2; /* Thay đổi thành 3/2 để chiều cao của nó trùng khớp tuyệt đối với ảnh 3/4 bên cạnh khi chiếm 2 cột */
+    overflow: hidden;
+    background-color: #f7f7f7;
+}
+
+.product-banner-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.product-banner-info {
+    padding: 28px 0 0 0; /* Tăng lề trên để tiêu đề banner thẳng hàng ngang hoàn hảo với tiêu đề sản phẩm bên cạnh */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+}
+
+.product-banner-title {
+    font-size: 17px; /* Kích thước chữ 17px tinh tế, dễ đọc */
+    font-weight: 700;
+    color: #1b1b1b;
+    line-height: 1.45;
+    margin: 0;
+    text-transform: none;
+}
+
+.product-banner-desc {
+    font-size: 13px;
+    color: #757575;
+    margin: 0;
+}
+
+.product-banner-btn {
+    display: inline-block;
+    border: 1px solid #1b1b1b;
+    border-radius: 999px;
+    padding: 6px 18px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #1b1b1b;
+    text-decoration: none;
+    margin-top: 6px;
+    transition: all 0.2s ease;
+}
+
+.product-banner-btn:hover {
+    background-color: #1b1b1b;
+    color: #ffffff;
+}
+
+/* Thẻ sản phẩm thường - Không đổ bóng, không dời cạnh */
+.product-card {
+    background-color: transparent;
+    padding: 0 0 16px 0;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    cursor: pointer;
+}
+
+.product-image-wrap {
+    width: 100%;
+    aspect-ratio: 3 / 4; /* Tỉ lệ vàng 3:4 cho ảnh người mẫu đứng */
+    position: relative;
+    overflow: hidden;
+    background-color: #f7f7f7;
+}
+
+.product-color-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+}
+
+.product-color-img.active {
+    display: block; /* Chỉ hiển thị ảnh màu đang active */
+}
+
+/* Nút chuyển ảnh nhanh Trái/Phải (chỉ hiện khi hover) */
+.img-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 10;
+    transition: all 0.2s ease;
+}
+
+.img-nav-prev {
+    left: 8px;
+}
+
+.img-nav-next {
+    right: 8px;
+}
+
+.product-card:hover .img-nav-btn {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Tem bestseller bán chạy góc trái dưới ảnh */
+.badge-bestseller {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    background-color: #ffffff;
+    color: #1b1b1b;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 3px 6px;
+    border: 1px solid #1b1b1b;
+    letter-spacing: 0.05em;
+    z-index: 5;
+}
+
+.product-swatches-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0 0 0;
+}
+
+.color-swatches {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* Chấm tròn swatch chọn màu sắc */
+.swatch {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+    border: 1.5px solid transparent;
+}
+
+/* Vòng đen mỏng bên ngoài swatch khi được chọn */
+.swatch.active {
+    box-shadow: 0 0 0 1px #ffffff, 0 0 0 2.5px #1b1b1b;
+}
+
+/* Nút trái tim wishlist yêu thích */
+.wishlist-btn {
+    color: #767676;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    margin-right: 30px;
+}
+
+.wishlist-btn.active svg {
+    fill: #ff4d4f; /* Trái tim đỏ thắm khi được click chọn */
+    stroke: #ff4d4f;
+}
+
+.product-info {
+    padding: 6px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.product-meta {
+    font-size: 12px;
+    color: #757575;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+.product-title {
+    font-size: 15px;
+    font-weight: 400;
+    color: #1b1b1b;
+    line-height: 1.35;
+    margin-top: 1px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Giới hạn tối đa 2 dòng tiêu đề */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.product-price {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1b1b1b;
+    margin-top: 2px;
+    line-height: 1.2;
+}
+
+.product-desc {
+    font-size: 12px;
+    color: #757575;
+    margin-top: 1px;
+    line-height: 1.4;
+}
+
+.product-rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #1b1b1b;
+    margin-top: 2px;
+    line-height: 1;
+}
+
+.star-icon {
+    color: #1b1b1b;
+    font-size: 13px;
+}
+
+.rating-value {
+    color: #1b1b1b;
+    font-weight: 700;
+}
+
+.rating-count {
+    color: #515151e1;
+    font-weight: 400;
+}
+
+
+/* ==========================================================================
+   11. CHÂN TRANG ĐẦY ĐỦ (Main Footer)
+   ========================================================================== */
+#main-footer {
+    background-color: #f4f4f4;
+    padding: 48px 0 32px 0;
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    color: #1b1b1b;
+    border-top: 1px solid #e5e5e5;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.footer-links-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.footer-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.footer-row-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: #757575;
+    letter-spacing: 0.05em;
+    text-transform: none;
+}
+
+.footer-row-links {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 400;
+    color: #1b1b1b;
+}
+
+.footer-row-links a {
+    color: #1b1b1b;
+    text-decoration: none;
+    transition: text-decoration 0.2s ease;
+}
+
+.footer-row-links a:hover {
+    text-decoration: underline;
+}
+
+.footer-row-links .divider {
+    color: #dcdcdc;
+    font-size: 12px;
+    font-weight: 300;
+    user-select: none;
+}
+
+/* Dòng tin tức khuyến mãi đỏ đặc trưng Uniqlo */
+.footer-promo {
+    font-size: 13px;
+    color: #e60012;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.footer-legal-section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    border-top: 1.5px solid #e5e5e5;
+    padding-top: 24px;
+}
+
+.legal-link, 
+.cookie-link {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1b1b1b;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.legal-link:hover, 
+.cookie-link:hover {
+    text-decoration: underline;
+}
+
+.company-details {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 12px;
+    color: #666666;
+    line-height: 1.6;
+}
+
+.company-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1b1b1b;
+    margin-bottom: 2px;
+}
+
+.footer-bottom-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1.5px solid #e5e5e5;
+    padding-top: 20px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.footer-copyright p {
+    font-size: 11px;
+    color: #757575;
+    line-height: 1.5;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.social-icon {
+    color: #1b1b1b;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    transition: opacity 0.2s ease;
+}
+
+.social-icon:hover {
+    opacity: 0.6;
+}
+
+.social-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+
+/* ==========================================================================
+   12. HIỆU ỨNG CUỘN GHIM DÍNH (Scroll & Sticky Effects)
+   ========================================================================== */
+
+/* Trạng thái cuộn lên (Scroll Up): Gần dính menu chữ nhỏ sát Header */
+body.scroll-up .subcategory-nav-wrapper {
+    position: fixed;
+    top: 80px; /* Ngay sát mép dưới Header */
+    left: 0;
+    width: 100%;
+    z-index: 90;
+    background-color: #ffffff;
+    animation: slideDown 0.35s ease-out; /* Trượt xuất hiện êm ái */
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+body.scroll-up #filter-bar {
+    top: 126px; /* 80px Header + 46px chiều cao của sub-nav */
+}
+
+/* Ẩn bớt hàng chọn cửa hàng và sắp xếp khi cuộn ghim dính để thu gọn diện tích tối đa */
+body.scroll-down .filter-top-row,
+body.scroll-up .filter-top-row,
+body.scroll-down .filter-results-row,
+body.scroll-up .filter-results-row {
+    display: none;
+}
+
+body.scroll-down #filter-bar,
+body.scroll-up #filter-bar {
+    border-bottom: 1px solid #cbc8c8;
+}
+
+
+/* ==========================================================================
+   13. QUẢN LÝ HIỂN THỊ CÁC TRANG CÓ ĐIỀU KIỆN (Conditional Views)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   PHẦN A: MẶC ĐỊNH ẨN TẤT CẢ NỘI DUNG CÁC VIEW (Để tránh bị hiện đè lên nhau)
+   --> NẾU BẠN THÊM MỘT PHẦN MỚI, HÃY THÊM CLASS '.only-[tên-phần-mới]' VÀO DANH SÁCH DƯỚI ĐÂY.
+   -------------------------------------------------------------------------- */
+.only-all,
+.only-polo,
+.only-ut,
+.only-somi,
+.only-sweat,
+.only-quan,
+.only-quandai,
+.only-quanshort,
+.only-aokhoac,
+.only-aobp,
+.only-ao,
+.only-damvay,
+.only-dam,
+.only-vay,
+.only-dolot,
+.only-airism,
+.only-heattech,
+.only-heattechh,
+.only-ht,
+.only-htextra,
+.only-htultra,
+.only-htdomactrong,
+.only-aobra,
+.only-quantat,
+.only-dolotkhac,
+.only-tat,
+.only-domacnha,
+.only-pajama,
+.only-phukien,
+.only-suw,
+.only-suwaokhoac,
+.only-suwao,
+.only-suwquan,
+.only-domactrong,
+.only-suwphukien
+ {
+    display: none;
+}
+
+/* --------------------------------------------------------------------------
+   PHẦN B: HIỂN THỊ CÁC VIEW ĐƠN LẺ KHI ACTIVE (.view-[tên] thì hiện .only-[tên])
+   --> NẾU BẠN THÊM MỘT PHẦN MỚI, HÃY VIẾT RULE TƯƠNG TỰ DẠNG:
+       body.view-[tên-phần-mới] .only-[tên-phần-mới] { display: block; }
+   -------------------------------------------------------------------------- */
+
+/* Chỉ hiển thị trang Tất cả khi body có class .view-all */
+body.view-all .only-all {
+    display: block;
+}
+
+/* Chỉ hiển thị trang Polo khi body có class .view-polo */
+body.view-polo .only-polo {
+    display: block;
+}
+
+/* Chỉ hiển thị trang UT khi body có class .view-ut */
+body.view-ut .only-ut {
+    display: block;
+}
+
+/* Chỉ hiển thị trang Sơ mi khi body có class .view-somi */
+body.view-somi .only-somi {
+    display: block;
+}
+
+/* Chỉ hiển thị trang Áo nỉ & Hoodie khi body có class .view-sweat */
+body.view-sweat .only-sweat {
+    display: block;
+}
+
+body.view-sweat .result-count.count-sweat {
+    display: block;
+}
+
+/* Chỉ hiển thị trang Quần khi body có class .view-quan */
+body.view-quan .only-quan {
+    display: block;
+}
+
+body.view-quan .result-count.count-quan {
+    display: block;
+}
+
+/* Hiển thị số lượng sản phẩm cho các trang áo khoác */
+body.view-aokhoac .result-count.count-aokhoac {
+    display: block;
+}
+body.view-aobp .result-count.count-aobp {
+    display: block;
+}
+body.view-ao .result-count.count-ao {
+    display: block;
+}
+
+/* Hiển thị số lượng sản phẩm cho các trang đầm váy */
+body.view-damvay .result-count.count-damvay {
+    display: block;
+}
+body.view-dam .result-count.count-dam {
+    display: block;
+}
+body.view-vay .result-count.count-vay {
+    display: block;
+}
+
+/* Chỉ hiển thị trang Quần Dài khi body có class .view-quandai */
+body.view-quandai .only-quandai {
+    display: block;
+}
+
+body.view-quandai #quan-category-tabs-section {
+    display: none;
+}
+
+/* Chỉ hiển thị trang Quần Short khi body có class .view-quanshort */
+body.view-quanshort .only-quanshort {
+    display: block;
+}
+
+body.view-quanshort #quan-category-tabs-section {
+    display: none;
+}
+
+/* Chỉ hiển thị trang Áo khoác khi body có class .view-aokhoac */
+body.view-aokhoac .only-aokhoac {
+    display: block;
+}
+
+/* Chỉ hiển thị trang Áo Blouson & Áo Parka khi body có class .view-aobp */
+body.view-aobp .only-aobp {
+    display: block;
+}
+
+/* Chỉ hiển thị trang Áo khoác khi body có class .view-ao */
+body.view-ao .only-ao {
+    display: block;
+}
+
+/* Chỉ hiển thị trang Đầm Váy khi body có class .view-damvay */
+body.view-damvay .only-damvay {
+    display: block;
+}
+
+/* Chỉ hiển thị trang Đầm khi body có class .view-dam */
+body.view-dam .only-dam {
+    display: block;
+}
+
+/* Chỉ hiển thị trang Váy khi body có class .view-vay */
+body.view-vay .only-vay {
+    display: block;
+}
+
+/* Chỉ hiển thị trang Đồ mặc nhà khi body có class .view-domacnha */
+body.view-domacnha .only-domacnha {
+    display: block;
+}
+
+body.view-domacnha .result-count.count-domacnha {
+    display: block;
+}
+
+/* Chỉ hiển thị trang Pajama khi body có class .view-pajama */
+body.view-pajama .only-pajama {
+    display: block;
+}
+
+body.view-pajama .result-count.count-pajama {
+    display: block;
+}
+
+/* Chỉ hiển thị trang Phụ kiện khi body có class .view-phukien */
+body.view-phukien .only-phukien {
+    display: block;
+}
+
+body.view-phukien .result-count.count-phukien {
+    display: block;
+}
+
+body.view-suwaokhoac .result-count.count-suwaokhoac {
+    display: block;
+}
+
+
+
+/* --------------------------------------------------------------------------
+   PHẦN C: QUY TẮC HIỂN THỊ ĐẶC BIỆT CHO NHÓM SPORT UTILITY WEAR (SUW)
+   - view-suw (Trang Tất Cả SUW) sẽ hiển thị đồng thời TẤT CẢ các mục con.
+   - Các view-suw[con] đơn lẻ chỉ hiển thị đúng mục con đó.
+   --> NẾU THÊM MỤC CON MỚI CHO SUW, HÃY BỔ SUNG CLASS MỚI VÀO CẢ HAI DANH SÁCH DƯỚI ĐÂY.
+   -------------------------------------------------------------------------- */
+/* [SỬA] view-suw (Tất Cả): hiển thị TẤT CẢ sections SUW */
+body.view-suw .only-suw,
+body.view-suw .products-section.only-suwaokhoac,
+body.view-suw .products-section.only-suwao,
+body.view-suw .products-section.only-suwquan,
+body.view-suw .products-section.only-domactrong,
+body.view-suw .products-section.only-suwphukien,
+body.view-suwaokhoac .only-suwaokhoac,
+body.view-suwao .only-suwao,
+body.view-suwquan .only-suwquan,
+body.view-domactrong .only-domactrong,
+body.view-suwphukien .only-suwphukien {
+    display: block;
+}
+
+/* Ẩn only-domacnha (Đồ Mặc Nhà thường) trong các view SUW để tránh hiển thị nhầm */
+body.view-suw .only-domacnha,
+body.view-suwaokhoac .only-domacnha,
+body.view-suwao .only-domacnha,
+body.view-suwquan .only-domacnha,
+body.view-domactrong .only-domacnha,
+body.view-suwphukien .only-domacnha {
+    display: none !important;
+}
+
+/* Các trang nhóm Đồ Lót */
+body.view-dolot .only-dolot,
+body.view-airism .only-airism,
+body.view-heattech .only-heattech,
+body.view-heattechh .only-heattechh,
+body.view-ht .only-ht,
+body.view-htextra .only-htextra,
+body.view-htultra .only-htultra,
+body.view-htdomactrong .only-htdomactrong,
+body.view-aobra .only-aobra,
+body.view-quantat .only-quantat,
+body.view-dolotkhac .only-dolotkhac,
+body.view-tat .only-tat {
+    display: block;
+}
+
+/* Ẩn phần category tabs (bong bóng tròn) ở các trang con HEATTECH */
+body.view-ht .only-heattechh #category-tabs-section,
+body.view-htextra .only-heattechh #category-tabs-section,
+body.view-htultra .only-heattechh #category-tabs-section,
+body.view-htdomactrong .only-heattechh #category-tabs-section {
+    display: none;
+}
+
+/* Các ttrang nhóm Đồ mặc nhà */
+body.view-domacnha .only-domacnha,
+body.view-pajama .only-pajama,
+body.view-phukien .only-phukien {
+    display: block;
+}
+/* Ẩn thanh menu chữ gốc trên trang Quần để tránh chồng lấn */
+body.view-quan .subcategory-nav-wrapper,
+body.view-quandai .subcategory-nav-wrapper,
+body.view-quanshort .subcategory-nav-wrapper,
+body.view-aokhoac .subcategory-nav-wrapper,
+body.view-aobp .subcategory-nav-wrapper,
+body.view-ao .subcategory-nav-wrapper,
+body.view-damvay .subcategory-nav-wrapper,
+body.view-dam .subcategory-nav-wrapper,
+body.view-vay .subcategory-nav-wrapper,
+body.view-dolot .subcategory-nav-wrapper,
+body.view-airism .subcategory-nav-wrapper,
+body.view-heattech .subcategory-nav-wrapper,
+body.view-heattechh .subcategory-nav-wrapper,
+body.view-ht .subcategory-nav-wrapper,
+body.view-htextra .subcategory-nav-wrapper,
+body.view-htultra .subcategory-nav-wrapper,
+body.view-htdomactrong .subcategory-nav-wrapper,
+body.view-aobra .subcategory-nav-wrapper,
+body.view-quantat .subcategory-nav-wrapper,
+body.view-dolotkhac .subcategory-nav-wrapper,
+body.view-tat .subcategory-nav-wrapper,
+body.view-domacnha .subcategory-nav-wrapper,
+body.view-pajama .subcategory-nav-wrapper,
+body.view-phukien .subcategory-nav-wrapper,
+body.view-suw .subcategory-nav-wrapper,
+body.view-suwaokhoac .subcategory-nav-wrapper,
+body.view-suwao .subcategory-nav-wrapper,
+body.view-suwquan .subcategory-nav-wrapper,
+body.view-domactrong .subcategory-nav-wrapper,
+body.view-suwphukien .subcategory-nav-wrapper {
+    display: none;
+}
+
+
+/* Ẩn thanh subcategory nav của các trang khác khi ở đầm váy */
+body.view-damvay .subcategory-nav-wrapper-quan,
+body.view-damvay .subcategory-nav-wrapper-aokhoac,
+body.view-dam .subcategory-nav-wrapper-quan,
+body.view-dam .subcategory-nav-wrapper-aokhoac,
+body.view-vay .subcategory-nav-wrapper-quan,
+body.view-vay .subcategory-nav-wrapper-aokhoac{
+    display: none;
+}
+
+/* Ẩn thanh subcategory nav của các trang khác khi ở đồ lót */
+body.view-dolot .subcategory-nav-wrapper-quan,
+body.view-dolot .subcategory-nav-wrapper-aokhoac,
+body.view-dolot .subcategory-nav-wrapper-damvay,
+body.view-dolot .subcategory-nav-wrapper-domacnha,
+body.view-dolot .subcategory-nav-wrapper-phukien,
+body.view-dolot .subcategory-nav-wrapper-suw,
+body.view-dolot .subcategory-nav-wrapper-heattechh,
+body.view-airism .subcategory-nav-wrapper-quan,
+body.view-airism .subcategory-nav-wrapper-aokhoac,
+body.view-airism .subcategory-nav-wrapper-damvay,
+body.view-airism .subcategory-nav-wrapper-domacnha,
+body.view-airism .subcategory-nav-wrapper-phukien,
+body.view-airism .subcategory-nav-wrapper-suw,
+body.view-airism .subcategory-nav-wrapper-heattechh,
+body.view-heattech .subcategory-nav-wrapper-quan,
+body.view-heattech .subcategory-nav-wrapper-aokhoac,
+body.view-heattech .subcategory-nav-wrapper-damvay,
+body.view-heattech .subcategory-nav-wrapper-domacnha,
+body.view-heattech .subcategory-nav-wrapper-phukien,
+body.view-heattech .subcategory-nav-wrapper-suw,
+body.view-heattech .subcategory-nav-wrapper-heattechh,
+body.view-heattechh .subcategory-nav-wrapper-quan,
+body.view-heattechh .subcategory-nav-wrapper-aokhoac,
+body.view-heattechh .subcategory-nav-wrapper-damvay,
+body.view-heattechh .subcategory-nav-wrapper-domacnha,
+body.view-heattechh .subcategory-nav-wrapper-phukien,
+body.view-heattechh .subcategory-nav-wrapper-suw,
+body.view-heattechh .subcategory-nav-wrapper-dolot,
+body.view-ht .subcategory-nav-wrapper-quan,
+body.view-ht .subcategory-nav-wrapper-aokhoac,
+body.view-ht .subcategory-nav-wrapper-damvay,
+body.view-ht .subcategory-nav-wrapper-domacnha,
+body.view-ht .subcategory-nav-wrapper-phukien,
+body.view-ht .subcategory-nav-wrapper-suw,
+body.view-ht .subcategory-nav-wrapper-dolot,
+body.view-htextra .subcategory-nav-wrapper-quan,
+body.view-htextra .subcategory-nav-wrapper-aokhoac,
+body.view-htextra .subcategory-nav-wrapper-damvay,
+body.view-htextra .subcategory-nav-wrapper-domacnha,
+body.view-htextra .subcategory-nav-wrapper-phukien,
+body.view-htextra .subcategory-nav-wrapper-suw,
+body.view-htextra .subcategory-nav-wrapper-dolot,
+body.view-htultra .subcategory-nav-wrapper-quan,
+body.view-htultra .subcategory-nav-wrapper-aokhoac,
+body.view-htultra .subcategory-nav-wrapper-damvay,
+body.view-htultra .subcategory-nav-wrapper-domacnha,
+body.view-htultra .subcategory-nav-wrapper-phukien,
+body.view-htultra .subcategory-nav-wrapper-suw,
+body.view-htultra .subcategory-nav-wrapper-dolot,
+body.view-htdomactrong .subcategory-nav-wrapper-quan,
+body.view-htdomactrong .subcategory-nav-wrapper-aokhoac,
+body.view-htdomactrong .subcategory-nav-wrapper-damvay,
+body.view-htdomactrong .subcategory-nav-wrapper-domacnha,
+body.view-htdomactrong .subcategory-nav-wrapper-phukien,
+body.view-htdomactrong .subcategory-nav-wrapper-suw,
+body.view-htdomactrong .subcategory-nav-wrapper-dolot,
+body.view-aobra .subcategory-nav-wrapper-quan,
+body.view-aobra .subcategory-nav-wrapper-aokhoac,
+body.view-aobra .subcategory-nav-wrapper-damvay,
+body.view-aobra .subcategory-nav-wrapper-domacnha,
+body.view-aobra .subcategory-nav-wrapper-phukien,
+body.view-aobra .subcategory-nav-wrapper-suw,
+body.view-aobra .subcategory-nav-wrapper-heattechh,
+body.view-quantat .subcategory-nav-wrapper-quan,
+body.view-quantat .subcategory-nav-wrapper-aokhoac,
+body.view-quantat .subcategory-nav-wrapper-damvay,
+body.view-quantat .subcategory-nav-wrapper-domacnha,
+body.view-quantat .subcategory-nav-wrapper-phukien,
+body.view-quantat .subcategory-nav-wrapper-suw,
+body.view-quantat .subcategory-nav-wrapper-heattechh,
+body.view-dolotkhac .subcategory-nav-wrapper-quan,
+body.view-dolotkhac .subcategory-nav-wrapper-aokhoac,
+body.view-dolotkhac .subcategory-nav-wrapper-damvay,
+body.view-dolotkhac .subcategory-nav-wrapper-domacnha,
+body.view-dolotkhac .subcategory-nav-wrapper-phukien,
+body.view-dolotkhac .subcategory-nav-wrapper-suw,
+body.view-dolotkhac .subcategory-nav-wrapper-heattechh,
+body.view-tat .subcategory-nav-wrapper-quan,
+body.view-tat .subcategory-nav-wrapper-aokhoac,
+body.view-tat .subcategory-nav-wrapper-damvay,
+body.view-tat .subcategory-nav-wrapper-domacnha,
+body.view-tat .subcategory-nav-wrapper-phukien,
+body.view-tat .subcategory-nav-wrapper-suw,
+body.view-tat .subcategory-nav-wrapper-heattechh {
+    display: none;
+}
+
+/* Ẩn thanh subcategory nav của các trang khác khi ở đồ mặc nhà */
+body.view-domacnha .subcategory-nav-wrapper-quan,
+body.view-domacnha .subcategory-nav-wrapper-aokhoac,
+body.view-domacnha .subcategory-nav-wrapper-damvay,
+body.view-domacnha .subcategory-nav-wrapper-dolot,
+body.view-domacnha .subcategory-nav-wrapper-phukien,
+body.view-domacnha .subcategory-nav-wrapper-suw,
+body.view-domacnha .subcategory-nav-wrapper-heattechh,
+body.view-pajama .subcategory-nav-wrapper-quan,
+body.view-pajama .subcategory-nav-wrapper-aokhoac,
+body.view-pajama .subcategory-nav-wrapper-damvay,
+body.view-pajama .subcategory-nav-wrapper-dolot,
+body.view-pajama .subcategory-nav-wrapper-phukien,
+body.view-pajama .subcategory-nav-wrapper-suw,
+body.view-pajama .subcategory-nav-wrapper-heattechh {
+    display: none;
+}
+
+/* Ẩn thanh subcategory nav của các trang khác khi ở phụ kiện */
+body.view-phukien .subcategory-nav-wrapper-quan,
+body.view-phukien .subcategory-nav-wrapper-aokhoac,
+body.view-phukien .subcategory-nav-wrapper-damvay,
+body.view-phukien .subcategory-nav-wrapper-dolot,
+body.view-phukien .subcategory-nav-wrapper-domacnha,
+body.view-phukien .subcategory-nav-wrapper-suw,
+body.view-phukien .subcategory-nav-wrapper-heattechh {
+    display: none;
+}
+
+/* Ẩn thanh subcategory nav của các trang khác khi ở SUW */
+body.view-suw .subcategory-nav-wrapper-quan,
+body.view-suw .subcategory-nav-wrapper-aokhoac,
+body.view-suw .subcategory-nav-wrapper-damvay,
+body.view-suw .subcategory-nav-wrapper-dolot,
+body.view-suw .subcategory-nav-wrapper-domacnha,
+body.view-suw .subcategory-nav-wrapper-phukien,
+body.view-suw .subcategory-nav-wrapper-heattechh,
+body.view-suwaokhoac .subcategory-nav-wrapper-quan,
+body.view-suwaokhoac .subcategory-nav-wrapper-aokhoac,
+body.view-suwaokhoac .subcategory-nav-wrapper-damvay,
+body.view-suwaokhoac .subcategory-nav-wrapper-dolot,
+body.view-suwaokhoac .subcategory-nav-wrapper-domacnha,
+body.view-suwaokhoac .subcategory-nav-wrapper-phukien,
+body.view-suwaokhoac .subcategory-nav-wrapper-heattechh,
+body.view-suwao .subcategory-nav-wrapper-quan,
+body.view-suwao .subcategory-nav-wrapper-aokhoac,
+body.view-suwao .subcategory-nav-wrapper-damvay,
+body.view-suwao .subcategory-nav-wrapper-dolot,
+body.view-suwao .subcategory-nav-wrapper-domacnha,
+body.view-suwao .subcategory-nav-wrapper-phukien,
+body.view-suwao .subcategory-nav-wrapper-heattechh,
+body.view-quan .subcategory-nav-wrapper-aokhoac,
+body.view-quan .subcategory-nav-wrapper-damvay,
+body.view-quan .subcategory-nav-wrapper-dolot,
+body.view-quan .subcategory-nav-wrapper-domacnha,
+body.view-quan .subcategory-nav-wrapper-phukien,
+body.view-quan .subcategory-nav-wrapper-suw,
+body.view-quan .subcategory-nav-wrapper-heattechh {
+    display: none;
+}
+
+/* Thanh menu phụ riêng biệt dành riêng cho trang Quần (Mặc định ẩn ở đầu trang) */
+.subcategory-nav-wrapper-quan {
+    display: none;
+    width: 100%;
+    background-color: #ffffff;
+}
+
+.subcategory-nav-wrapper-aokhoac {
+    display: none;
+    width: 100%;
+    background-color: #ffffff;
+}
+
+.subcategory-nav-wrapper-damvay {
+    display: none;
+    width: 100%;
+    background-color: #ffffff;
+}
+
+.subcategory-nav-wrapper-dolot {
+    display: none;
+    width: 100%;
+    background-color: #ffffff;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+}
+
+.subcategory-nav-wrapper-dolot::-webkit-scrollbar {
+    display: none;
+}
+
+.subcategory-nav-wrapper-domacnha {
+    display: none;
+    width: 100%;
+    background-color: #ffffff;
+}
+
+.subcategory-nav-wrapper-phukien,
+.subcategory-nav-wrapper-suw,
+.subcategory-nav-wrapper-heattech,
+.subcategory-nav-wrapper-heattechh {
+    display: none;
+    width: 100%;
+    background-color: #ffffff;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+}
+
+.subcategory-nav-wrapper-heattech::-webkit-scrollbar,
+.subcategory-nav-wrapper-heattechh::-webkit-scrollbar {
+    display: none;
+}
+
+body.view-quandai .subcategory-nav-wrapper-quan,
+body.view-quanshort .subcategory-nav-wrapper-quan,
+body.view-aokhoac .subcategory-nav-wrapper-aokhoac,
+body.view-aobp .subcategory-nav-wrapper-aokhoac,
+body.view-ao .subcategory-nav-wrapper-aokhoac,
+body.view-damvay .subcategory-nav-wrapper-damvay,
+body.view-dam .subcategory-nav-wrapper-damvay,
+body.view-vay .subcategory-nav-wrapper-damvay,
+body.view-dolot .subcategory-nav-wrapper-dolot,
+body.view-airism .subcategory-nav-wrapper-dolot,
+body.view-aobra .subcategory-nav-wrapper-dolot,
+body.view-quantat .subcategory-nav-wrapper-dolot,
+body.view-dolotkhac .subcategory-nav-wrapper-dolot,
+body.view-tat .subcategory-nav-wrapper-dolot,
+body.view-heattech .subcategory-nav-wrapper-heattech,
+body.view-ht .subcategory-nav-wrapper-heattechh,
+body.view-htextra .subcategory-nav-wrapper-heattechh,
+body.view-htultra .subcategory-nav-wrapper-heattechh,
+body.view-htdomactrong .subcategory-nav-wrapper-heattechh,
+body.view-ht .subcategory-nav-wrapper-heattech,
+body.view-htextra .subcategory-nav-wrapper-heattech,
+body.view-htultra .subcategory-nav-wrapper-heattech,
+body.view-htdomactrong .subcategory-nav-wrapper-heattech,
+body.view-domacnha .subcategory-nav-wrapper-domacnha,
+body.view-pajama .subcategory-nav-wrapper-domacnha,
+body.view-suw .subcategory-nav-wrapper-suw,
+body.view-suwaokhoac .subcategory-nav-wrapper-suw,
+body.view-suwao .subcategory-nav-wrapper-suw,
+body.view-suwquan .subcategory-nav-wrapper-suw,
+body.view-domactrong .subcategory-nav-wrapper-suw,
+body.view-suwphukien .subcategory-nav-wrapper-suw {
+    display: block;
+}
+
+/* Ẩn thanh sub-nav khi ở trang đầu tiên - Độ ưu tiên cao hơn */
+body.view-quan .subcategory-nav-wrapper-quan.first-page,
+body.view-quandai .subcategory-nav-wrapper-quan.first-page,
+body.view-quanshort .subcategory-nav-wrapper-quan.first-page,
+body.view-aokhoac .subcategory-nav-wrapper-aokhoac.first-page,
+body.view-aobp .subcategory-nav-wrapper-aokhoac.first-page,
+body.view-ao .subcategory-nav-wrapper-aokhoac.first-page,
+body.view-damvay .subcategory-nav-wrapper-damvay.first-page,
+body.view-dam .subcategory-nav-wrapper-damvay.first-page,
+body.view-vay .subcategory-nav-wrapper-damvay.first-page,
+body.view-dolot .subcategory-nav-wrapper-dolot.first-page,
+body.view-airism .subcategory-nav-wrapper-dolot.first-page,
+body.view-aobra .subcategory-nav-wrapper-dolot.first-page,
+body.view-quantat .subcategory-nav-wrapper-dolot.first-page,
+body.view-dolotkhac .subcategory-nav-wrapper-dolot.first-page,
+body.view-tat .subcategory-nav-wrapper-dolot.first-page,
+body.view-heattech .subcategory-nav-wrapper-heattech.first-page,
+body.view-ht .subcategory-nav-wrapper-heattech.first-page,
+body.view-htextra .subcategory-nav-wrapper-heattech.first-page,
+body.view-htultra .subcategory-nav-wrapper-heattech.first-page,
+body.view-htdomactrong .subcategory-nav-wrapper-heattech.first-page,
+body.view-domacnha .subcategory-nav-wrapper-domacnha.first-page,
+body.view-pajama .subcategory-nav-wrapper-domacnha.first-page,
+body.view-phukien .subcategory-nav-wrapper-phukien.first-page {
+    display: none;
+}
+
+
+/* Khi cuộn lên ở trang Quần, ghim dính (Sticky) menu phụ lên sát mép dưới Header */
+body.view-quan.scroll-up .subcategory-nav-wrapper-quan,
+body.view-quandai.scroll-up .subcategory-nav-wrapper-quan,
+body.view-quanshort.scroll-up .subcategory-nav-wrapper-quan,
+body.view-aokhoac.scroll-up .subcategory-nav-wrapper-aokhoac,
+body.view-aobp.scroll-up .subcategory-nav-wrapper-aokhoac,
+body.view-ao.scroll-up .subcategory-nav-wrapper-aokhoac,
+body.view-damvay.scroll-up .subcategory-nav-wrapper-damvay,
+body.view-dam.scroll-up .subcategory-nav-wrapper-damvay,
+body.view-vay.scroll-up .subcategory-nav-wrapper-damvay,
+body.view-dolot.scroll-up .subcategory-nav-wrapper-dolot,
+body.view-airism.scroll-up .subcategory-nav-wrapper-dolot,
+body.view-aobra.scroll-up .subcategory-nav-wrapper-dolot,
+body.view-quantat.scroll-up .subcategory-nav-wrapper-dolot,
+body.view-dolotkhac.scroll-up .subcategory-nav-wrapper-dolot,
+body.view-tat.scroll-up .subcategory-nav-wrapper-dolot,
+body.view-heattech.scroll-up .subcategory-nav-wrapper-heattech,
+body.view-ht.scroll-up .subcategory-nav-wrapper-heattech,
+body.view-htextra.scroll-up .subcategory-nav-wrapper-heattech,
+body.view-htultra.scroll-up .subcategory-nav-wrapper-heattech,
+body.view-htdomactrong.scroll-up .subcategory-nav-wrapper-heattech,
+body.view-domacnha.scroll-up .subcategory-nav-wrapper-domacnha,
+body.view-pajama.scroll-up .subcategory-nav-wrapper-domacnha,
+body.view-phukien.scroll-up .subcategory-nav-wrapper-phukien,
+body.view-suw.scroll-up .subcategory-nav-wrapper-suw,
+body.view-suwaokhoac.scroll-up .subcategory-nav-wrapper-suw,
+body.view-suwao.scroll-up .subcategory-nav-wrapper-suw,
+body.view-suwquan.scroll-up .subcategory-nav-wrapper-suw,
+body.view-domactrong.scroll-up .subcategory-nav-wrapper-suw,
+body.view-suwphukien.scroll-up .subcategory-nav-wrapper-suw {
+    display: block ; 
+    position: fixed;
+    top: 80px; /* Sát ngay dưới Header (cao 80px) */
+    left: 4px;
+    width: 100%;
+    z-index: 90;
+    background-color: #ffffff;
+    animation: slideDown 0.35s ease-out; /* Trượt xuất hiện êm ái */
+}
+/* Mặc định ẩn thanh menu chữ ở trang Tất cả khi chưa cuộn */
+body.view-all .subcategory-nav-wrapper{
+    display: none;
+}
+
+/* Khi cuộn lên ở trang Tất cả, hiện lại thanh menu chữ nhỏ để làm menu dính */
+body.view-all.scroll-up .subcategory-nav-wrapper {
+    display: block;
+}
+
+
+/* 14. THIẾT LẬP CO GIÃN TRÊN DI ĐỘNG (Responsive Media Queries) */
+
+/* A. Responsive cho Header & Navigation */
+@media (max-width: 768px) {
+    nav {
+        height: 60px;
+        padding: 0 16px;
+    }
+
+    .header-left {
+        gap: 20px;
+    }
+
+    .nav-links {
+        display: none; /* Ẩn các liên kết lớn trên điện thoại */
+    }
+
+    .hide-mobile {
+        display: none;
+    }
+
+    #mobile-menu-btn {
+        display: flex;
+    }
+
+    .nav-icons {
+        gap: 12px;
+    }
+
+    .header-icon-btn {
+        width: 36px;
+        height: 36px;
+    }
+
+    .hicon {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+/* B. Responsive cho Mega Menu */
+@media (max-width: 1024px) {
+    .category-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .menu-grid-5 {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .menu-grid-4 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .mega-menu {
+        top: 60px;
+        max-height: calc(100vh - 60px);
+    }
+
+    .menu-container {
+        padding: 20px 16px 30px;
+    }
+
+    .category-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+    }
+
+    .category-item {
+        gap: 12px;
+        padding: 8px;
+    }
+
+    .category-icon {
+        width: 48px;
+        height: 48px;
+    }
+
+    .category-name {
+        font-size: 12px;
+    }
+
+    .menu-grid-5,
+    .menu-grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .menu-grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .menu-section h3 {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .category-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .menu-grid-5,
+    .menu-grid-4,
+    .menu-grid-3 {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* C. Responsive cho Lưới & Thẻ sản phẩm */
+@media (max-width: 1024px) {
+    .products-grid {
+        /* grid-template-columns: repeat(3, 1fr); /* 3 cột trên máy tính bảng */
+        gap: 1px;
+        display: block;
+    }
+}
+
+@media (max-width: 768px) {
+    .products-section {
+        margin: 15px auto 40px;
+        padding: 0 10px;
+    }
+    
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr); /* Co về 2 cột trên điện thoại */
+        gap: 1px;
+    }
+    
+    .product-card {
+        padding-bottom: 12px;
+    }
+    
+    .product-info {
+        padding: 6px 0 0 0;
+    }
+    
+    .product-swatches-row {
+        padding: 8px 0 0 0;
+    }
+    
+    .product-title {
+        font-size: 12px;
+        min-height: 32px;
+    }
+    
+    .product-price {
+        font-size: 13px;
+    }
+}
+
+/* D. Responsive cho Footer */
+@media (max-width: 768px) {
+    #main-footer {
+        padding: 32px 0 24px 0;
+    }
+    
+    .footer-container {
+        gap: 20px;
+    }
+
+    .footer-bottom-bar {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        gap: 16px;
+        padding-top: 16px;
+    }
+}
+
+/* E. Responsive cho Hero Banner & Gender Tabs dưới banner */
+@media (max-width: 768px) {
+    .casual-hero-banner {
+        height: 420px; /* Hạ chiều cao banner trên điện thoại đứng */
+    }
+    
+    .casual-banner-title {
+        font-size: 20px;
+    }
+
+    .casual-banner-subtitle {
+        font-size: 11px;
+    }
+
+    .casual-banner-btn {
+        font-size: 10px;
+        padding: 6px 16px;
+        margin-top: 10px;
+    }
+
+    .banner-gender-tabs {
+        gap: 24px;
+        padding: 12px 0;
+    }
+
+    .gender-tab {
+        font-size: 12px;
+    }
+}
+
+/* F. Khung chứa Tiêu đề chung cho các section (Polo, Sweat, Quần, SUW, v.v.) */
+.section-title-container,
+.polo-title-container {
+    max-width: 1200px;
+    margin: 32px auto 8px;
+    padding: 0 20px;
+    width: 100%;
+}
+
+.section-title-container .category-main-title,
+.polo-title-container .category-main-title {
+    font-size: 30px;
+    font-weight: 400;
+    text-transform: none; /* Tắt chữ in hoa hoàn toàn để chữ in thường cao cấp */
+    letter-spacing: -0.01em;
+    color: #1b1b1b;
+    margin-bottom: 0;
+}
+
+/* Đảm bảo thẻ a danh mục trong Mega Menu hiển thị đẹp mắt, không gạch chân và giữ nguyên màu chữ */
+a.category-item {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
